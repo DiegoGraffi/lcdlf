@@ -5,6 +5,8 @@ module.exports = {
     ignoreDuringBuilds: true
   },
   images: {
+    // domains: ['turismo.lacumbre.gob.ar'],
+    domains: ['p4.wallpaperbetter.com'],
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
