@@ -5,7 +5,7 @@ import ProductCard from 'components/nuestros/product-card';
 import Image from 'next/image';
 import FondoBodega from '../../public/images/fondoBodega.png';
 
-const bodega = 'roberto-bonfanti';
+const bodega = 'ruca-malen';
 
 export default async function Bodega() {
   const query = `
@@ -20,11 +20,18 @@ export default async function Bodega() {
           nodes {
             title
             description
-            images(first: 1) {
+            images(first: 2) {
               nodes {
                 url
               }
             }
+						priceRange {
+							maxVariantPrice {
+								amount
+								currencyCode
+								
+							}
+						}
 						
             productType
           }
@@ -35,7 +42,7 @@ export default async function Bodega() {
 
   const data: any = await shopifyFetch({ query });
 
-  console.log(data.body);
+  console.log(data.body.data.collectionByHandle.products.nodes[0].productType);
 
   return (
     <div className="min-h-screen w-[100%] items-center justify-center overflow-hidden">
@@ -110,9 +117,10 @@ export default async function Bodega() {
                   {/**@ts-ignore */}
                   <ProductCard
                     imageUrl={product.images.nodes[0].url}
+                    imageUrlHover={product.images.nodes[1]?.url}
                     productName={product.title}
-                    price={12354}
-                    currencyCode="$"
+                    price={product.priceRange.maxVariantPrice.amount}
+                    currencyCode={product.priceRange.maxVariantPrice.currencyCode}
                   />
                 </h4>
               ))}
