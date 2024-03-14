@@ -1,5 +1,5 @@
 import Footer from 'components/nuestros/footer';
-import Navbar from 'components/nuestros/nav-bar';
+import Navbar from 'components/nuestros/navbar/nav-bar';
 import { GeistSans } from 'geist/font';
 import { ensureStartsWith } from 'lib/utils';
 import { ReactNode, Suspense } from 'react';

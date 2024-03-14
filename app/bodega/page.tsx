@@ -2,10 +2,11 @@ import BodegSideBar from 'components/nuestros/bodega-sidebar';
 import ProductCard from 'components/nuestros/product-card';
 import { fetchGraphql, graphql } from 'lib/graphql';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import FondoBodega from '../../public/images/fondoBodega.png';
 
-const bodega = 'ruca-malen';
+const bodega = 'roberto-bonfanti';
 
 export default async function Bodega() {
   const query = graphql(`
@@ -18,6 +19,7 @@ export default async function Bodega() {
         }
         products(first: 10) {
           nodes {
+            handle
             title
             description
             images(first: 2) {
@@ -109,15 +111,17 @@ export default async function Bodega() {
             </div>
             <div className="grid basis-3/4 gap-3 md:grid-cols-2 lg:grid-cols-3 ">
               {collection.products.nodes.map((product, index) => (
-                <h4 key={index} className="text-black">
-                  <ProductCard
-                    imageUrl={product.images.nodes[0]!.url}
-                    imageUrlHover={product.images.nodes[1]?.url}
-                    productName={product.title}
-                    price={product.priceRange.maxVariantPrice.amount}
-                    currencyCode={product.priceRange.maxVariantPrice.currencyCode}
-                  />
-                </h4>
+                <Link key={index} href={`/product/${product.handle}`}>
+                  <h4 className="text-black">
+                    <ProductCard
+                      imageUrl={product.images.nodes[0]!.url}
+                      imageUrlHover={product.images.nodes[1]?.url}
+                      productName={product.title}
+                      price={product.priceRange.maxVariantPrice.amount}
+                      currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+                    />
+                  </h4>
+                </Link>
               ))}
             </div>
           </div>
