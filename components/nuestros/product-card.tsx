@@ -1,10 +1,10 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 type ProductCardProps = {
-  imageUrl: StaticImageData;
-  imageUrlHover?: StaticImageData;
+  imageUrl: string;
+  imageUrlHover?: string;
   productName: string;
-  price: number;
+  price: string;
   currencyCode: string;
 };
 
