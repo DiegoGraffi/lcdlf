@@ -1,16 +1,16 @@
-import { shopifyFetch } from 'lib/shopify';
-
 import BodegSideBar from 'components/nuestros/bodega-sidebar';
 import ProductCard from 'components/nuestros/product-card';
+import { fetchGraphql, graphql } from 'lib/graphql';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import FondoBodega from '../../public/images/fondoBodega.png';
 
 const bodega = 'ruca-malen';
 
 export default async function Bodega() {
-  const query = `
-    {
-      collectionByHandle(handle: "${bodega}") {
+  const query = graphql(`
+    query BodegaQuery($handle: String!) {
+      collection(handle: $handle) {
         description
         title
         image {
@@ -25,41 +25,40 @@ export default async function Bodega() {
                 url
               }
             }
-						priceRange {
-							maxVariantPrice {
-								amount
-								currencyCode
-								
-							}
-						}
-						
+            priceRange {
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+
             productType
           }
         }
       }
     }
-  `;
+  `);
 
-  const data: any = await shopifyFetch({ query });
+  const data = await fetchGraphql(query, { handle: bodega });
 
-  console.log(data.body.data.collectionByHandle.products.nodes[0].productType);
+  const collection = data.collection;
+
+  if (!collection) {
+    notFound();
+  }
 
   return (
     <div className="min-h-screen w-[100%] items-center justify-center overflow-hidden">
       <section className="relative h-screen min-h-screen w-screen items-center justify-center">
         <div className="absolute top-0 h-[100%] w-[100%]">
-          <Image
-            src={data.body.data.collectionByHandle.image.url}
-            alt="fondo"
-            fill
-            className="object-cover"
-          />
+          {collection.image && (
+            <Image src={collection.image.url} alt="fondo" fill className="object-cover" />
+          )}
           <div className="absolute h-[100%] w-[100%] bg-black opacity-50"></div>
         </div>
         <div className="absolute left-1/2 top-1/2 z-10 flex w-[600px] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[50px]">
           <h2 className="text-center text-[64px] font-extrabold uppercase text-white">
-            {/**@ts-ignore */}
-            {data.body.data.collectionByHandle.title}
+            {collection.title}
           </h2>
           <div className="flex gap-[15px]">
             <a
@@ -84,9 +83,7 @@ export default async function Bodega() {
             <h3 className="text-[32px] font-bold text-black">
               Vinos con tradición, elaborados con pasión
             </h3>
-            <p className="text-[16px] font-normal text-black">
-              {data.body.data.collectionByHandle.description}
-            </p>
+            <p className="text-[16px] font-normal text-black">{collection.description}</p>
           </div>
 
           <div className="relative h-[600px] w-[100%]">
@@ -111,12 +108,10 @@ export default async function Bodega() {
               <BodegSideBar />
             </div>
             <div className="grid basis-3/4 gap-3 md:grid-cols-2 lg:grid-cols-3 ">
-              {/**@ts-ignore */}
-              {data.body.data.collectionByHandle.products.nodes.map((product, index) => (
+              {collection.products.nodes.map((product, index) => (
                 <h4 key={index} className="text-black">
-                  {/**@ts-ignore */}
                   <ProductCard
-                    imageUrl={product.images.nodes[0].url}
+                    imageUrl={product.images.nodes[0]!.url}
                     imageUrlHover={product.images.nodes[1]?.url}
                     productName={product.title}
                     price={product.priceRange.maxVariantPrice.amount}
