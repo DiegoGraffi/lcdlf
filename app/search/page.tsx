@@ -20,11 +20,11 @@ export default async function SearchPage({
 
   const products = await getProducts({ sortKey, reverse, query: searchValue });
   const resultsText = products.length > 1 ? 'results' : 'result';
-
+  console.log(products.length);
   return (
     <>
       {searchValue ? (
-        <p className="mb-4">
+        <p className="mb-4 mt-28">
           {products.length === 0
             ? 'There are no products that match '
             : `Showing ${products.length} ${resultsText} for `}
@@ -32,7 +32,7 @@ export default async function SearchPage({
         </p>
       ) : null}
       {products.length > 0 ? (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <Grid className="mt-28 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
         </Grid>
       ) : null}

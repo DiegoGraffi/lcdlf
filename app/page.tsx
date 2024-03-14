@@ -7,47 +7,47 @@ export const metadata = {
   }
 };
 
-
 import Image from 'next/image';
+import fondo from '../public/images/fondoHome.png';
 
 export default async function HomePage() {
   return (
     <div className="min-h-screen w-[100%] items-center justify-center overflow-hidden">
-    <section className="relative h-screen min-h-screen w-screen items-center justify-center">
-      <div className="absolute top-0 h-[100%] w-[100%]">
-        <Image
-          src={"https://p4.wallpaperbetter.com/wallpaper/144/225/101/chianti-classico-vineyards-in-autumn-tuscany-italy-wallpaper-preview.jpg"}
-          alt="fondo"
-          fill
-          className=""
-        />
-        <div className="absolute h-[100%] w-[100%] bg-black opacity-50"></div>
-      </div>
-      <div className="absolute left-1/2 top-1/2 z-10 flex w-[600px] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[50px]">
-        <h2 className="text-center text-[64px] font-extrabold uppercase text-white">
-          LA CASA DE LOS FRANCESES
-        </h2>
-        <h3 className="text-center text-[15px] text-white">
-          En nuestra exclusiva selección, cada botella es una invitación a explorar los sabores intensos y las historias únicas de los viñedos más distinguidos de Argentina. Aquí, la tradición se funde con la innovación para ofrecerte una experiencia de degustación sin igual. Ya seas un aficionado buscando ampliar tu paladar o un conocedor en la búsqueda de tu próxima joya enológica, "La Casa De Los Franceses" es tu destino. Descubre con nosotros el alma del vino argentino, curada con un toque francés.
-        </h3>
-        <div className="flex gap-[15px]">
-          <a
-            href="#"
-            className="rounded-full border border-white px-[25px] py-[15px] transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
-          >
-            Ver Vinos
-          </a>
-          <a
-            href="#"
-            className="rounded-full border border-white px-[25px] py-[15px] transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
-          >
-            Contacto
-          </a>
+      <section className="relative h-screen min-h-screen w-screen items-center justify-center">
+        <div className="absolute top-0 h-[100%] w-[100%]">
+          <Image src={fondo} alt="fondo" fill className="" />
+          <div className="absolute h-[100%] w-[100%] bg-black opacity-50"></div>
         </div>
-      </div>
-    </section>
+        <div className="absolute left-1/2 top-1/2 z-10 flex w-[600px] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[50px]">
+          <h2 className="text-center text-[64px] font-extrabold uppercase text-white">
+            LA CASA DE LOS FRANCESES
+          </h2>
+          <h3 className="text-center text-[15px] text-white">
+            En nuestra exclusiva selección, cada botella es una invitación a explorar los sabores
+            intensos y las historias únicas de los viñedos más distinguidos de Argentina. Aquí, la
+            tradición se funde con la innovación para ofrecerte una experiencia de degustación sin
+            igual. Ya seas un aficionado buscando ampliar tu paladar o un conocedor en la búsqueda
+            de tu próxima joya enológica, "La Casa De Los Franceses" es tu destino. Descubre con
+            nosotros el alma del vino argentino, curada con un toque francés.
+          </h3>
+          <div className="flex gap-[15px]">
+            <a
+              href="#"
+              className="rounded-full border border-white px-[25px] py-[15px] transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
+            >
+              Ver Vinos
+            </a>
+            <a
+              href="#"
+              className="rounded-full border border-white px-[25px] py-[15px] transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
+            >
+              Contacto
+            </a>
+          </div>
+        </div>
+      </section>
 
-    {/* <section className="min-h-screen items-center justify-center bg-white p-[50px]">
+      {/* <section className="min-h-screen items-center justify-center bg-white p-[50px]">
       <div className="container mx-auto flex flex-col gap-[50px]">
         <div className="flex w-[50%] flex-col gap-[25px]">
           <h3 className="text-[32px] font-bold text-black">
@@ -87,6 +87,6 @@ export default async function HomePage() {
         </div>
       </div>
     </section> */}
-  </div>
-);
+    </div>
+  );
 }
