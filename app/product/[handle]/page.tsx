@@ -1,14 +1,10 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
-
 import { GridTileImage } from 'components/grid/tile';
-import { Gallery } from 'components/product/gallery';
-import { ProductDescription } from 'components/product/product-description';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
 import { getProduct, getProductRecommendations } from 'lib/shopify';
-import { Image } from 'lib/shopify/types';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export const runtime = 'edge';
 
@@ -81,18 +77,24 @@ export default async function ProductPage({ params }: { params: { handle: string
         }}
       />
       <div className="mx-auto flex min-h-screen max-w-screen-2xl flex-col items-center justify-center px-4 py-28">
-        <div className="flex w-full flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
-          <div className="h-full w-full basis-full rounded-lg bg-white lg:basis-4/6">
-            <Gallery
+        <div className="rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12 lg:flex-row lg:gap-8">
+          <div className="flex basis-full rounded-lg bg-white lg:basis-4/6 justify-center align-middle">
+            <img src={product.featuredImage.url} alt="" />
+            {/* <Gallery
               images={product.images.map((image: Image) => ({
                 src: image.url,
                 altText: image.altText
               }))}
-            />
+            /> */}
           </div>
-
-          <div className="basis-full lg:basis-2/6">
-            <ProductDescription product={product} />
+          <div className="flex w-full flex-col lg:flex-row">
+            <div className="flex-1 p-4">
+              <h1>{product.title}</h1>
+              <p>{product.description}</p>
+            </div>
+            <div className="flex-1 p-4">
+              <p>Aquí va el precio y otros detalles...</p>
+            </div>
           </div>
         </div>
         <Suspense>
