@@ -1,4 +1,3 @@
-import BodegSideBar from 'components/nuestros/bodega-sidebar';
 import ProductCard from 'components/nuestros/product-card';
 import { fetchGraphql, graphql } from 'lib/graphql';
 import Image from 'next/image';
@@ -106,8 +105,8 @@ export default async function Bodega() {
           </div>
 
           <div className="flex gap-[20px]">
-            <div className="flex basis-1/3 flex-col border">
-              <BodegSideBar />
+            <div className="flex basis-1/3 flex-col rounded-lg border">
+              <p className="p-4 text-black">sdjhfsdkjfhsdj</p>
             </div>
             <div className="grid basis-3/4 gap-3 md:grid-cols-2 lg:grid-cols-3 ">
               {collection.products.nodes.map((product, index) => (

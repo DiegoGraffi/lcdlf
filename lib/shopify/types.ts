@@ -126,6 +126,8 @@ export type ShopifyProduct = {
   seo: SEO;
   tags: string[];
   updatedAt: string;
+  vendor: string;
+  totalInventory: number;
 };
 
 export type ShopifyCartOperation = {

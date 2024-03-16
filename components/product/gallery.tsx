@@ -28,10 +28,10 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
 
   return (
     <>
-      <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
+      <div className="relative flex aspect-square h-full max-h-[550px] items-center justify-center overflow-hidden ">
         {images[imageIndex] && (
           <Image
-            className="h-full w-full object-contain p-7"
+            className="mx-auto max-h-[600px] max-w-[600px] rounded-lg bg-white object-contain p-7"
             fill
             sizes="(min-width: 1024px) 66vw, 100vw"
             alt={images[imageIndex]?.altText as string}
@@ -41,8 +41,8 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
         )}
 
         {images.length > 1 ? (
-          <div className="absolute bottom-[15%] flex w-full justify-center">
-            <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
+          <div className="absolute bottom-[10%] flex w-full justify-center">
+            <div className="mx-auto flex h-11 items-center rounded-lg border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
               <Link
                 aria-label="Previous product image"
                 href={previousUrl}
@@ -66,7 +66,7 @@ export function Gallery({ images }: { images: { src: string; altText: string }[]
       </div>
 
       {images.length > 1 ? (
-        <ul className="my-12 flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+        <ul className="mx-auto my-12 flex max-w-[min-content] items-center justify-center gap-3 overflow-auto rounded-lg bg-neutral-50 p-3 lg:mb-0">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
             const imageSearchParams = new URLSearchParams(searchParams.toString());
