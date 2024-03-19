@@ -7,10 +7,44 @@ export const metadata = {
   }
 };
 
+import ProductsGrid from 'components/nuestros/products-grid';
+import { fetchGraphql, graphql } from 'lib/graphql';
 import Image from 'next/image';
 import fondo from '../public/images/fondoHome.png';
 
 export default async function HomePage() {
+
+
+    const query = graphql(`
+     query ProductsQuery {
+         products(first: 15) {
+             edges {
+                 node {
+                     id
+                     title
+                     handle
+                     images(first: 2){
+                         nodes{
+                          url
+                         }
+                     }
+                     priceRange {
+                         maxVariantPrice {
+                             amount
+                             currencyCode
+                         }
+                     }
+                 }
+             }
+         }
+     }
+     `);
+
+     const data = await fetchGraphql(query, {});
+     const products = data.products.edges.map(edge => edge.node);
+
+  // const productslist = await getProduct(getProductsQuery)
+  console.log(products.length)
   return (
     <div className="min-h-screen w-[100%] items-center justify-center overflow-hidden">
       <section className="relative h-screen min-h-screen w-screen items-center justify-center">
@@ -18,6 +52,9 @@ export default async function HomePage() {
           <Image src={fondo} alt="fondo" fill className="" />
           <div className="absolute h-[100%] w-[100%] bg-black opacity-50"></div>
         </div>
+
+        
+
         <div className="absolute left-1/2 top-1/2 z-10 flex w-[600px] -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-[50px]">
           <h2 className="text-center text-[64px] font-extrabold uppercase text-white">
             LA CASA DE LOS FRANCESES
@@ -46,7 +83,10 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
+      <div>
+         <ProductsGrid products={products}/>
+          {/* <Carrusel></Carrusel> ///////////////        ACA QUISE METER EL CARRUSEL PERO NO ME SALIO XD*/}
+        </div>
       {/* <section className="min-h-screen items-center justify-center bg-white p-[50px]">
       <div className="container mx-auto flex flex-col gap-[50px]">
         <div className="flex w-[50%] flex-col gap-[25px]">

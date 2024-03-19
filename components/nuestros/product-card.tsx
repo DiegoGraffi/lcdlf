@@ -16,7 +16,7 @@ function ProductCard({
   currencyCode
 }: ProductCardProps) {
   return (
-    <div className="group relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50 p-4 transition-all duration-200 ease-in-out hover:border-neutral-400">
+    <div className="group relative flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50 p-4 transition-all duration-200 ease-in-out hover:bg-neutral-400">
       <div className="relative flex aspect-square w-[100%] overflow-hidden rounded-xl border border-neutral-200 bg-white">
         {imageUrlHover ? (
           <>
