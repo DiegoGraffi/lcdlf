@@ -1,3 +1,4 @@
+import { AddToCart } from 'components/cart/add-to-cart';
 import { GridTileImage } from 'components/grid/tile';
 import { Gallery } from 'components/product/gallery';
 import { HIDDEN_PRODUCT_TAG } from 'lib/constants';
@@ -114,9 +115,8 @@ export default async function ProductPage({ params }: { params: { handle: string
                   +
                 </p>
               </div>
-              <div className="cursor-pointer rounded-md bg-white p-[15px] transition-all duration-200 ease-in-out hover:bg-neutral-300">
-                <p className="text-[16px] font-semibold text-black">Agregar al carrito</p>
-              </div>
+
+              <AddToCart availableForSale={product.availableForSale} variants={product.variants} />
             </div>
           </div>
         </div>
